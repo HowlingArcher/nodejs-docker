@@ -1,0 +1,20 @@
+# Step 1: Use an official Node.js runtime as a parent image
+FROM node:16
+
+# Step 2: Set the working directory inside the container
+WORKDIR /usr/src/app
+
+# Step 3: Copy package.json and package-lock.json into the container
+COPY package*.json ./
+
+# Step 4: Install dependencies inside the container
+RUN npm install
+
+# Step 5: Copy the rest of the bot files into the container
+COPY . .
+
+# Step 6: Expose any ports your bot might need (usually not required for Discord bots)
+# EXPOSE 8080  (Only necessary if your bot uses webhooks or APIs)
+
+# Step 7: Define the command to run the bot
+CMD ["node", "{{startupFile}}"]
