@@ -3,9 +3,14 @@ import os
 import subprocess
 import time
 
+# Change this to your filepath
+template_filepath = "/home/admin/nodejs-docker/template.txt"
+
+if not os.path.exists(template_filepath):
+    print("Template File not found! Please change this in the 'create-docker-compose.py' file!")
+
 # Get the current working directory (where the script is being run from)
 current_dir = os.getcwd()
-
 
 # Extract the folder name from the current working directory
 folder_name = os.path.basename(current_dir)
@@ -22,7 +27,7 @@ placeholder = "{{startupFile}}"
 new_value = startup_file  # You can replace this with the actual startup file name
 
 # Open the source template file and read its content
-with open("/home/admin/nodejs-docker/template.txt", "r") as file:
+with open(template_filepath, "r") as file:
     content = file.read()
 
 # Replace the placeholder with the new value
