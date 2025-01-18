@@ -2,6 +2,7 @@
 import os
 import subprocess
 import time
+import sys
 
 # Change this to your filepath
 template_filepath = "/home/admin/nodejs-docker/template.txt"
@@ -23,18 +24,18 @@ print(f"Running script in folder: {folder_name}")
 startup_file = input("Please enter the startup file name (e.g., index.js): ")
 
 # Ask if the person wants to enable a port
-enable_port = input("Does this container require a port number? y/N")
+enable_port = input("Does this container require a port number? y/N: ")
 if not enable_port:
 	enable_port = "n"
 if enable_port.lower() == "y":
-	portnumber = input("What port does your code use?");
+	portnumber = input("What port does your code use?")
 	dockerport = input("What port number do you want to access your program at?")
 	if not portnumber:
 		print("Missint a port you want to use")
-		exit
+		sys.exit()
 	if not dockerport:
 		print("Missing a port you want to use")
-		exit
+		sys.exit()
 if enable_port.lower() == "n":
 	print("Will not assign a port number")
 
@@ -71,10 +72,11 @@ if enable_port == "n":
 	docker_run_command = f"docker run -d --name {folder_name}-container {folder_name}"
 if enable_port == "y":
 	docker_run_command = f"docker run -d -p {dockerport}:{portnumber} --name {folder_name}-container {folder_name}"
+
 print(f"Running command: {docker_run_command}")
 subprocess.run(docker_run_command, shell=True, check=True)
 
-print(f"Docker container should be up!")
+print("Docker container should be up!")
 
 docker_log_command = f"docker logs {folder_name}-container"
 
