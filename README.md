@@ -6,7 +6,9 @@ This is a simple shell script that automates the process for me to create a dock
 
 ## How to use this?
 You can use this script by copying this repo like this:
-```git clone git@github.com:HowlingArcher/nodejs-docker.git```
+```sh
+git clone git@github.com:HowlingArcher/nodejs-docker.git
+```
 
 CD into the repo folder: `cd nodejs-docker`
 
